@@ -41,6 +41,7 @@
 </html>
 
 <?php
+    //Extrae los datos
         if(isset($_POST['btnOk'])){
                 $id = rand(1, 200); 
                 $nombre = $_POST["txtNombre"];

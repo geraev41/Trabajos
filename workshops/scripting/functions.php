@@ -1,7 +1,6 @@
 <?php
     function mostrar_estudiantes($filas){
-        shell_exec('conexion.php'); 
-        //include ('conexion.php'); 
+        include ('conexion.php'); 
         $con = getConexion(); 
         $sql = "SELECT COUNT(*)nombre from students"; 
         $result= $con->query($sql); 

@@ -70,15 +70,34 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <div id="container">
 	<div id="body">
         <h2>Registro de usuario</h2>
-        <form method="post"action="index.php/persona/registrar">
-            <input type="text" placeholder="Nombre completo" name="nombre"><br><br>
-            <input type="text" placeholder="Apellidos" name="apellidos"><br><br>
-            <input type="text" placeholder="Télefono" name="telefono"><br><br>
-            <input type="text" placeholder="Correo eléctronico" name="email"><br><br>
-            <input type="submit" value="Guardar" name="btnGuardar"><br><br>
+		<?php 
+			$rutaAction = "index.php/persona/registrar"; 
+			if(isset($user)){
+				$user = $user[0];
+				$rutaAction = "guardar_cambios?id=$user->id"; 
+			}
+			$nombre = trim((isset($user->nombre)? $user->nombre: ""),""); 
+			$apellido= trim((isset($user->apellidos)? $user->apellidos: ""),""); 
+			$telefono= trim((isset($user->telefono)? $user->telefono: ""),""); 
+			$email = trim((isset($user->correo)? $user->correo: ""),""); 
+		?>
+        <form method="post"action="<?php echo $rutaAction?>">
+            <input required type="text" placeholder="Nombre completo" name="nombre" value="<?php echo($nombre);?>"><br><br>
+            <input required type="text" placeholder="Apellidos" name="apellidos"  value="<?php echo($apellido);?>"><br><br>
+            <input required type="text" placeholder="Télefono" name="telefono"  value="<?php echo($telefono);?>"><br><br>
+            <input required type="text" placeholder="Correo eléctronico" name="email"  value="<?php echo($email);?>"><br><br>
+            <input required type="submit" value="Guardar" name="btnGuardar"><br><br>
 		</form> 
-		<form method="post" action="index.php/persona/ver">
-			<input type="submit" value="Ver" >		
+
+
+		<form method="post" action="index.php/persona/datos">
+		<?php 
+			$vstyle="visibility: visible;";
+			if(isset($user)){
+				$vstyle="visibility: hidden;";
+			}
+		?>
+			<input type="submit" value="Ver" style="<?php echo($vstyle);?>" >	
 		</form>
 	</div>
 </div>
